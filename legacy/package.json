@@ -1,0 +1,14 @@
+{
+  "name": "legacy-app",
+  "version": "1.0.0",
+  "description": "A legacy rubber duck store",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Moritz Grauel",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}
