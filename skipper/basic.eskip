@@ -1,0 +1,2 @@
+catchAllToLegacy: *
+  -> "http://localhost:3000"
