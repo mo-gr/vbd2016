@@ -1,0 +1,14 @@
+{
+  "name": "voxxed-tailor",
+  "version": "1.0.0",
+  "description": "tailor for voxxed demo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Moritz Grauel <moritz.grauel@zalando.de>",
+  "license": "MIT",
+  "dependencies": {
+    "node-tailor": "^1.0.4"
+  }
+}

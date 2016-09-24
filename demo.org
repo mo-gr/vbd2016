@@ -1,0 +1,48 @@
+* Demo Plan
+
+1. start legacy app
+  #+BEGIN_SRC sh
+docker run --rm -tip 3000:3000 legacy:oldest
+  #+END_SRC
+2. show legacy app
+  #+BEGIN_SRC sh
+open http://localhost:3000/
+  #+END_SRC
+3. start skipper
+  #+BEGIN_SRC sh
+skipper -routes-file basic.eskip
+  #+END_SRC
+4. show legacy again
+  #+BEGIN_SRC sh
+open http://localhost:9090/
+  #+END_SRC
+5. start header and content fragments
+6. start tailor
+7. update route/skipper
+8. show new mixed store
+9. start slow-ajax
+10. update template
+11. show new store
+
+
+* Todo
+
+** TODO build legacy store
+*** static home and pdp page
+*** page is slow due to "Slow Feature™"
+*** style store
+*** take rubber duck pic
+** TODO build fragmetns
+*** header
+*** pdp
+*** slow
+*** slow-ajax
+** TODO build template
+*** duck page
+*** duck page with slow-ajax
+** TODO build tailor
+*** use fileystem for templates
+** TODO prepare routes
+*** basic catch all to legacy
+*** rubber duck to tailor
+*** an ajax route
