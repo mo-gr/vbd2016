@@ -1,3 +1,7 @@
-button {
+.productFragment {
+    font-family: Futura;
+}
+
+.productFragment button {
     font-weight: bold;
 }

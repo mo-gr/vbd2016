@@ -13,5 +13,6 @@ main = scotty 7000 $ do
     addHeader "Link"
               "<http://localhost:7000/product.css>; rel=\"stylesheet\""
     html $ renderHtml $ do
-      H.img H.! A.alt "Producht picture" H.! A.src "duck.jpg"
-      H.button "Buy Now!"
+      H.div H.! A.class_ "productFragment" $ do
+        H.img H.! A.alt "Producht picture" H.! A.src "duck.jpg"
+        H.button "Buy Now!"

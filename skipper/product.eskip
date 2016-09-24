@@ -1,0 +1,7 @@
+catchAllToLegacy: *
+  -> setResponseHeader("World", "old")
+  -> "http://localhost:3000";
+
+newProductPage: Path("/duck")
+  -> setResponseHeader("World", "new")
+  -> "http://localhost:8080";
