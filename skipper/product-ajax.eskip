@@ -1,0 +1,12 @@
+catchAllToLegacy: *
+  -> setResponseHeader("World", "old")
+  -> "http://localhost:3000";
+
+newProductPage: Path("/duck")
+  -> setResponseHeader("World", "new")
+  -> modPath(".*", "/duck-ajax")
+  -> "http://localhost:8080";
+
+slowFeatue: Path("/api/slow")
+  -> setResponseHeader("World", "new")
+  -> "http://localhost:6006"

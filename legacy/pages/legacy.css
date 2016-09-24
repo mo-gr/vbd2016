@@ -18,3 +18,7 @@ body {
     text-align: center;
     float: right;
 }
+
+ul {
+    list-style: none;
+}
