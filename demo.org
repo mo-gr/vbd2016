@@ -27,22 +27,27 @@ open http://localhost:9090/
 
 * Todo
 
-** TODO build legacy store
+** DONE build legacy store
+CLOSED: [2016-09-24 Sat 22:50]
 *** static home and pdp page
 *** page is slow due to "Slow Feature™"
 *** style store
 *** take rubber duck pic
-** TODO build fragmetns
+** DONE build fragmetns
+CLOSED: [2016-09-24 Sat 22:27]
 *** header
 *** pdp
 *** slow
 *** slow-ajax
-** TODO build template
+** DONE build template
+CLOSED: [2016-09-24 Sat 22:27]
 *** duck page
 *** duck page with slow-ajax
-** TODO build tailor
+** DONE build tailor
+CLOSED: [2016-09-24 Sat 22:27]
 *** use fileystem for templates
-** TODO prepare routes
+** DONE prepare routes
+CLOSED: [2016-09-24 Sat 22:27]
 *** basic catch all to legacy
 *** rubber duck to tailor
 *** an ajax route
