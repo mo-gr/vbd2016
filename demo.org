@@ -1,6 +1,6 @@
 * Demo Plan
 
-1. start legacy app
+1. start legacy app (cathode)
   #+BEGIN_SRC sh
 docker run --rm -tip 3000:3000 legacy:oldest
   #+END_SRC
@@ -17,16 +17,31 @@ skipper -routes-file basic.eskip
 open http://localhost:9090/
   #+END_SRC
 5. start header and content fragments
+  #+BEGIN_SRC sh
+cd fragments/header && header-fragment
+cd fragments/product && product-fragment
+cd fragments/slow && slow-fragment
+  #+END_SRC
 6. start tailor
+  #+BEGIN_SRC sh
+cd tailor && node .
+  #+END_SRC
 7. update route/skipper
+  #+BEGIN_SRC sh
+skipper -routes-file product.eskip
+  #+END_SRC
 8. show new mixed store
-9. start slow-ajax
-10. update template
-11. show new store
+9. update template
+  #+BEGIN_SRC sh
+skipper -routes-file product-async.eskip
+skipper -routes-file product-ajax.eskip
+  #+END_SRC
+10. show new store
 
 
 * Todo
-
+** TODO Prepare actual talking
+** TODO reherse
 ** DONE build legacy store
 CLOSED: [2016-09-24 Sat 22:50]
 *** static home and pdp page
