@@ -16,7 +16,7 @@ skipper -routes-file basic.eskip
   #+BEGIN_SRC sh
 open http://localhost:9090/
   #+END_SRC
-5. start header and content fragments
+5. start fragments
   #+BEGIN_SRC sh
 cd fragments/header && header-fragment
 cd fragments/product && product-fragment
@@ -66,3 +66,166 @@ CLOSED: [2016-09-24 Sat 22:27]
 *** basic catch all to legacy
 *** rubber duck to tailor
 *** an ajax route
+
+* Talk
+** Title slide
+Good morning everyone! Hi and Welcome to my talk "The front end taboo - a story of full stack micro services" or how we harvest the benefits of microservices in the front end.
+My name is Moritz and I sell shoes for a living. Well.. not directly of course but that is hopefully the result of my job. I'm an engineer at Zalando.
+Who here has ever heard of zalando? Raise your hands?
+Wow - more/less than I expected. But not too surprising, since we currently don't ship to serbia - at least officially.
+** Slide 2
+We are europes biggest online fashion retailer. We run an online fashion store website, that sells to over a dozen countries in europe.
+We run our own warehouses, we created our own fashion labels and we even run a few brick and mortar stores.
+** Slide 3
+Of course we also have have mobile apps. Not only for our own fashion store. We constantly try innovative new ventures that experiment with creative business ideas around fashion. We aim to become our customers one-stop solution for everything related to fashion.
+And we are also a tech company - and as such we sometimes do crazy things
+** Slide 4 (space)
+Like this one time, where we sent a shoe into space. Just because we can. That is an actual picture, not a photoshop. We really launched a shoe into the stratosphere. And we even recovered it - and the attached camera - later.
+** Slide 5 (facts)
+Anyways. Zalando is a huge company. We currently make over 3 billion EUR revenue per year. We have 135M visits per month. Our fashion store alone peaks at over 7000 requests per second. We have Over 50 million active customers.
+We employ over 10.000 people in all of europe. More than 1200 of those in tech alone. We have tech hubs in Berlin, Helsinki, Dublin and more to come. And this is not even the end. We are still on a growing path. We still want to expand and we want to become europes most magnetic employer in tech.
+But enough advertisement for my company. That is not why you are here... I just wanted to give you an impression of the size and scope of zalando and the challanges that we face day to day.
+** Slide 6 (Challanges)
+As you can surely imagine, a company of this size has a code base of a similar size. And that comes with its own set of challanges.
+Our huge code base has effects on productivity
+** Slide 7 (Effects on Prod)
+A huge code base has lots of dependencies. Inside of the companies and on third party libraries. So every change requires a huge amount of coordination - often over multiple departments. And that takes time. In the end, the law of dimminishing returns hits us hard. We are at a point were investing more resources - usually developer-hours - does not provide linear returns on the investment.
+And of course, a huge code base is also a huge drag for innovation.
+** Slide 8
+You all know, that small an nimble companies can sometimes run circles around the big ones. Innovation and radical changes in a huge code base are super difficult.
+For once, a huge code base comes with tons of bugs. There are studies that show a pretty constant relation between lines of code and bugs. So more code also means more bugs. And worse, sometimes other parts of the code base rely on those "bugs". Changing a part here might have side effects and break something in a seemingly unrelated part of the code base.
+The usual way to keep this under control is rigid processes. Things like strict code reviews and detailed specs. But the more rigid the processes, the harder it is to innovate.
+** Slide 9
+And then there is the effect on growth, that a huge legacy code base has. A huge code base has to be learned, which makes onboarding slow. It is usually based on a - let's say "well established" tech stack. That is usually boring for motivated developers. So it results in a less magnetic company and it is harder to hire good people.
+<pause>
+Has anyone here ever heard of conways Law?
+** Slide 10 (conway)
+Conways law states that organizations, which design systems are constrained to produce designs which are copies of the communication structures of these organizations.
+So we tried something radical. To migrate away from our legacy code base, we hacked our organizations so that our systems will follow.
+** Slide 11
+In early 2015 zalandos VP of engineering, Eric Bowman, announced radical agility - a drastic restructuring of our tech organization.
+** Slide 12
+We want small, independent teams, with a clearly defined focus and a high degree of autonomy that are able to deliver amazing products. We believe, that this is the only way we can move forward and grow, that scales.
+** Slide 13
+So we've created a culture, that values trust over control. And similar to a micro-services architecute, we created small, focussed teams, with a clear purpose. Those teams can move autonomosly and are highly encouraged and enabled to achieve excellence.
+** Slide 14
+So to quickly summarize, we've created a purpose driven organization and are in the process of migrating to a service oriented architecure, composed of loosely coupled, independent micro services. And all is good in the world, right? But with all those micro services and loosely coupled independent teams, there is a taboo that most people don't really talk about.
+** Slide 15 (Frontend taboo)
+How does this all apply to the frontend? Does the frontend really enjoy all those benefits?
+** Slide 16
+Some of the common promises of micro services are autonous work, polyglot tech stacks and independent release cycles without inter-team coordination. But let's look at those from a frontend perspective.
+** Slide 17
+In a typical system, you have a bunch of APIs, all microservices and both teams are happy. They can release whenever they want and grow their APIs in the way best for their stakeholders.
+** Slide 18
+But the best APIs are usually useless to the customer if there is no frontend with a great User experience. And someone has to build this frontend.
+Unless you want your frontend to look like a complete patchwork, the common approach here is to have a frontend monolith.
+** Slide 19
+And this frontend monolith gets contributions from multiple teams. Even if you decide to have a few of those for different areas of your business, this doesn't usually scale well to dozens or even hundreds of teams.
+** Slide 20
+So - back to the promises. Can teams work autonomously on a frontend-monlith?
+** Slide 21
+Of course not - they have to coordinate their efforts.
+** Slide 22
+And not only due to such coordinations, they can't freely choose their tech stacks. What if one team absolutely prefers vanilla CSS over less? Or TypeScript over vanilla JavaScript? Good luck introducing such a change to a frontend-monlith that gets contributions from many different teams.
+** Slide 23
+And of course, independend releases are also a no go. We had multiple occasions at zalando, where a new feature could not be released when it was done because some other part of the frontend monolith was in a broken state and releases were on hold.
+
+It almost seems, like there is a dirty little secret regarding micro-services and the frontend. Maybe micro-services don't belong there?
+
+When we realized that, we took a step back and asked ourselves
+** Slide 24 (can we...)
+Can we do better? Can we build an architecture, that provides the benefits of micro services to the frontend? One that scales to dozens or even hundreds of teams? One that provides a high degree of autonomy, yet still keeps the bigger picture in mind, such that the final frontend system doesn't look and feel like a patchwork to the customer.
+
+We might not have found the perfect solution, but we found one that works for us and our constraints. And we call it
+** Slide 25 (mosaic)
+Mosaic. Small, individual pieces, that form a beautiful whole. But the name is also a reference to the NCSA Mosaic browser - the browser that popularized the World Wide Web. We hope to be pushing it even further - even if only a little bit.
+The mosaic architecture introduces three core concepts. In a mosaic system, there are things, that we call a fragment.
+** Slide 26
+It is easiest to think about fragments as micro-services that return html markup. Fragments are owned by teams. There is no clear 1-to-1 relationshop between teams and fragments, but in general, a team should take care of a small number of independent fragments.
+** Slide 27
+There is no communication between fragments and fragments don't nest. But fragments talk themselves to APIs or microservices. It is advisable to keep business logic out of fragments. Their concern is rendering and rendering logic.
+But every fragment only returns pieces of a complete page. To assemble an actual page we need the second core concept of the mosaic architecture. The layout service.
+** Slide 28
+The layout service calls the fragments, collects their responses and assembles a complete page out of it. We use templates to configure and control which fragments participate in a given page. Templates are also owned by a team but not necessarily the teams, that own the fragments on a given page.
+But to forma beautiful mosaic, we need one more component in the picture. We need a mapping from URL patterns to templates and a gateway for ajax calls. Since ajax calls in general don't return markup, they most commonly talk to microservices directly instead of fragments.
+In order to handle incoming requests into a mosaic system, we need a router.
+** Slide 29
+That router is the third and final component, that mosaic introduces. It is easiest to think about mosaic as an architecture specifiactaion, that defines how those three components, the router, the layout service and the fragments interact with each other.
+The router and the layout service are pieces of software, that we created. The fragments are to be created by the individual feature teams.
+** Slide 30
+Our router is called skipper and our layout service is called tailor. They are both open source and on github, but more on that later.
+
+But at a high level, every incoming request into our mosaic architecture hits the router first. The router decides based on the current routing configuration, whether the request should hit an API or go to the layout service. If it hits the layout service, that one calls - again based on the current templates - which fragments to call. It collects the responses of the fragments and assembles them into a consistent page.
+In our system, the routes are managed by an API named Innkeeper and the templates based on an API named quilt - we are sometimes a bit too creative with naming.
+But those are just an implementation details. In the beginning, we just started with filesystem based route and template management.
+
+So, let's look at those components in a bit more details.
+** Slide 31 (Router)
+First the router. As I already mentioned, ours is named skipper.
+** Slide 32
+Skipper is basically a transparent request proxy. It looks at the incoming requests and forwards them to different endpoints. Usually either APIs or the layout service.
+Skipper also provides sme basix security features. Since every incoming request first hits skipper, it is the only part that needs to be protected against DDoS attacks. Since it is the one entry point into our system, we also don't have to to worry about Cross Origin complications. Skipper is also the only part of the whole system that knows the encryption keys for the cookies that we sot on our customers and it conveniently provides XSRF protection.
+
+To keep latency down, it fully supports streaming responses and easily handles our peak load of nearly 8000 requests per second.
+
+If you are interested in skipper, it is written in Go and the source is on github.
+
+The flexibility of the router allows us one more very neat trick.
+** Slide 33
+Incoming requests are routed by skipper either to the layout service or to APIs. But we can of course also route requests directly to the legacy application - by the way, we gave our legacy application also a name. Our legacy app is called jimmy.
+And since skipper can easily and transparently route requests also to jimmy, this gives us a super neat migration path away from jimmy. Feature by feature and page by page, we can slowly migrate away from our legacy application and onto mosaic. And if something goes terribly wrong, we even have the chance to roll back - this is way better on your mental health than a huge big bang migration - trust me on this one.
+From the point of skipper, the legacy application is just another layout service.
+
+Let me quickly show you, how routes are configured in skipper
+** Slide 34
+We created our own, declarative DSL for routes in skipper. A route always consists of a human readable id, followed by one or more predicates, that must all match for a route to be chosen.
+A route might contain an arbitrary number of filters, that can change both, the incoming request and the outgoing response. And finally, every route has exactly one backend where the incoming request is forwarded to.
+Routes do not branch and there is no complex logic to them. Instead, they are simple and fast.
+** Slide 35
+The predicates that determine if a route matches cover pretty much everything that might be interesting in an HTTP request. Paths, hosts, headers or cookies. And if you need something special, they are easily extendable in go. For example, we have a few custom ones, that are not part of the open source skipper that allow us to treat requests by our mobile app differently.
+** Slide 36
+Next in a route are filters. They are used to modify the request. Filters are for example used to encrypt or decrypt cookies, set cookies and so on. Again, filters can be easily extended in go. A filter is basically an interface that has one method for the incoming request and one for the outgong response. Filters are called in order.
+Skipper comes out of the box with a few filters but we realised that we had to write quite a few that are specific to zalando and especially jimmy.
+** Slide 37
+Here are just a few ideas of what skipper can do. We have some filters to use it as an oauth proxy for example or to support weighted traffic control. To my knwoledge, at least three completely seperat business units at zalando have a skipper as part of their system.
+** Slide 38 (Communication)
+Before we talk about the layout service, let me quickly say a few things about fragments. Fragments are built by the teams themselves, so there is no specific product to introduce here, but the mosaic architecture very loosely defines how fragments should talk to the layout service.
+** Slide 39 (Fragments)
+A fragment is really just a plain old microservices that responds with partial HTML. Partial in the sense that it usually omits the head and body part.
+All other communication is happenig based on HTTP. Skipper enriches the incoming requests with some custom HTTP headers, such that the fragments can easily know who is calling them and on what external URL they are currently responsding to.
+But there really is no special complex protocol between any of the players in a mosaic architecture. It is all just HTTP and headers.
+We encourage early flushing of headers since this gives the mosaic some angles for optimization.
+Fragments, for example, might declare their static resources like JS and CSS files in the link header. As soon as the layout service receives those headers, it can trigger the browser to prefetch those even though the actual response of the fragment might still be hundreds of milliseconds away.
+** Slide 40 (Composition)
+This is only one of the features of our layout service. So let us look a bit more closely into it.
+** Slide 41
+As I previously mentioned, our layout service is called tailor. It is the central part of the mosaic architecture. It is the entity that composes complete pages and it is crucial for the performance of the system. It parallelizes the fragment requests and streams the responses to the client.
+Tailor makes heavy use of streams deliver content as fast as possible to the client and it is also repsonsible to trigger the client side intialization code of fragments.
+Our tailor is written in node js but that is just an implementation detail of the mosaic architecure.
+** Slide 42
+Tailor was initially inspired by facebooks big pipe approach that streams parts of the page to the browser whenever they are ready. The naive approach of just streaming whatever is ready to the client has some shortcomings, that were not acceptable to us.
+For example, there are cases, where a page request does not result in a 200 response. If you hit an article that is out of stock, we might for example redirect you to the page of that articles brand. So who should be in control of that redirect? Our solution is that every page can have exaclty one primary fragment. If a page has a primary fragment, the whole page waits for the status code of that fragment before any content is flushed to the browser. This allows the primary fragment to control the status code of the whole page.
+The declaration of the fragments and the assignment of the primary all happens in the template.
+Templates are basically HTML and look like this
+** Slide 43
+Tailor preprocesses this HTML template and for every eccurence of the fragment tat, it spawns a fragment request when that template is requested.
+I previously mentioned big pipe. In our system, fragments are by default streamed to the client in the order they appear in the fragment. But a fragment might be tagged a async. In that case only a placeholder is streamed to the client and only later, when the fragment actually responded, the placeholder is substituted with the response.
+Of course, there are alos facilities for a base template in tailor to avoid the duplication of common boilerplate in all templates.
+Tailor also allows the template authors to declare timouts and error-fallbacks as attributes on the fragments.
+** Slide 44 (Result)
+And the final result of all this?
+** Slide 45
+Well, to our customers, all of this hopefully makes no difference except for way faster responses and perceived performance. Both, time to first byte and time to first meaningful render drastically improved in our mosaic pages.
+But the general page still looks and feels like a zalando fashion store page. There are usually also fragments on the page, that are invisible to the user. In our case, all pages contain a base assets fragment, that provides basic UX and UI components, that all other fragments use to provide a consisten customer journey.
+** Slide 46
+And for us develpoers? We have huge improvements on all three previously mentioned fronts.
+We can innovate way faster. New features can be injected in existing templates. This provides tighter feedback loops and allows us to experiment with new tech stacks while limiting the impact to only a few fragments or pages.
+We are more productive by giving teams end-to-end responsibility and allwong them to redeploy their fragments dozens of times a day if they wish. Well.. Of course only if they manage 0-downtime deployments. But there is no coordination necessary between teams as long as they maintain their uptime.
+And this also allows us to grow faster. There is less to teach to new hires and we can quickly spin up new teams and let them develop innovative new ideas as fragments without affecting the rest of the fashion store.
+** Slide 47 (Demo)
+Before I come to an end, allow me to demonstrate you the basics of a mosaic architecutre....
+** Slide 48
+That's it. Thank you for your time. If you are interested, check out our mosaic9 page or our zalando github page for more info.
+And if you have any questions, now is the time!
+** Slide 49
+Thanks again and have a great conference!
