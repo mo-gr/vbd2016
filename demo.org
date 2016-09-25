@@ -98,12 +98,14 @@ The usual way to keep this under control is rigid processes. Things like strict 
 ** Slide 9
 And then there is the effect on growth, that a huge legacy code base has. A huge code base has to be learned, which makes onboarding slow. It is usually based on a - let's say "well established" tech stack. That is usually boring for motivated developers. So it results in a less magnetic company and it is harder to hire good people.
 <pause>
+I think we can all agree, that a huge legacy code base is a problem for an organization.
 Has anyone here ever heard of conways Law?
 ** Slide 10 (conway)
 Conways law states that organizations, which design systems are constrained to produce designs which are copies of the communication structures of these organizations.
 So we tried something radical. To migrate away from our legacy code base, we hacked our organizations so that our systems will follow.
+In early 2015 zalandos VP of engineering, Eric Bowman, announced radical agility
 ** Slide 11
-In early 2015 zalandos VP of engineering, Eric Bowman, announced radical agility - a drastic restructuring of our tech organization.
+A drastic restructuring of our tech organization to counter conways law and use it to our advantage.
 ** Slide 12
 We want small, independent teams, with a clearly defined focus and a high degree of autonomy that are able to deliver amazing products. We believe, that this is the only way we can move forward and grow, that scales.
 ** Slide 13
@@ -150,7 +152,7 @@ The layout service calls the fragments, collects their responses and assembles a
 But to forma beautiful mosaic, we need one more component in the picture. We need a mapping from URL patterns to templates and a gateway for ajax calls. Since ajax calls in general don't return markup, they most commonly talk to microservices directly instead of fragments.
 In order to handle incoming requests into a mosaic system, we need a router.
 ** Slide 29
-That router is the third and final component, that mosaic introduces. It is easiest to think about mosaic as an architecture specifiactaion, that defines how those three components, the router, the layout service and the fragments interact with each other.
+That router is the third and final component, that mosaic architecutre introduces. It is easiest to think about mosaic as an architecture specifiactaion, that defines how those three components, the router, the layout service and the fragments interact with each other.
 The router and the layout service are pieces of software, that we created. The fragments are to be created by the individual feature teams.
 ** Slide 30
 Our router is called skipper and our layout service is called tailor. They are both open source and on github, but more on that later.
@@ -208,7 +210,7 @@ For example, there are cases, where a page request does not result in a 200 resp
 The declaration of the fragments and the assignment of the primary all happens in the template.
 Templates are basically HTML and look like this
 ** Slide 43
-Tailor preprocesses this HTML template and for every eccurence of the fragment tat, it spawns a fragment request when that template is requested.
+Tailor preprocesses this HTML template and for every eccurence of the fragment tag, it spawns a fragment request when that template is requested.
 I previously mentioned big pipe. In our system, fragments are by default streamed to the client in the order they appear in the fragment. But a fragment might be tagged a async. In that case only a placeholder is streamed to the client and only later, when the fragment actually responded, the placeholder is substituted with the response.
 Of course, there are alos facilities for a base template in tailor to avoid the duplication of common boilerplate in all templates.
 Tailor also allows the template authors to declare timouts and error-fallbacks as attributes on the fragments.
