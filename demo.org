@@ -96,10 +96,10 @@ You all know, that small an nimble companies can sometimes run circles around th
 For once, a huge code base comes with tons of bugs. There are studies that show a pretty constant relation between lines of code and bugs. So more code also means more bugs. And worse, sometimes other parts of the code base rely on those "bugs". Changing a part here might have side effects and break something in a seemingly unrelated part of the code base.
 The usual way to keep this under control is rigid processes. Things like strict code reviews and detailed specs. But the more rigid the processes, the harder it is to innovate.
 ** Slide 9
-And then there is the effect on growth, that a huge legacy code base has. A huge code base has to be learned, which makes onboarding slow. It is usually based on a - let's say "well established" tech stack. That is usually boring for motivated developers. So it results in a less magnetic company and it is harder to hire good people.
+and then there is the effect on growth, that a huge legacy code base has. a huge code base has to be learned, which makes onboarding slow. it is usually based on a - let's say "well established" tech stack. that is usually boring for motivated developers. so it results in a less magnetic company and it is harder to hire good people.
 <pause>
-I think we can all agree, that a huge legacy code base is a problem for an organization.
-Has anyone here ever heard of conways Law?
+i think we can all agree, that a huge legacy code base is a problem for an organization.
+has anyone here ever heard of conways law?
 ** Slide 10 (conway)
 Conways law states that organizations, which design systems are constrained to produce designs which are copies of the communication structures of these organizations.
 So we tried something radical. To migrate away from our legacy code base, we hacked our organizations so that our systems will follow.
@@ -156,22 +156,17 @@ That router is the third and final component, that mosaic architecutre introduce
 The router and the layout service are pieces of software, that we created. The fragments are to be created by the individual feature teams.
 ** Slide 30
 Our router is called skipper and our layout service is called tailor. They are both open source and on github, but more on that later.
-
 But at a high level, every incoming request into our mosaic architecture hits the router first. The router decides based on the current routing configuration, whether the request should hit an API or go to the layout service. If it hits the layout service, that one calls - again based on the current templates - which fragments to call. It collects the responses of the fragments and assembles them into a consistent page.
 In our system, the routes are managed by an API named Innkeeper and the templates based on an API named quilt - we are sometimes a bit too creative with naming.
 But those are just an implementation details. In the beginning, we just started with filesystem based route and template management.
-
 So, let's look at those components in a bit more details.
 ** Slide 31 (Router)
 First the router. As I already mentioned, ours is named skipper.
 ** Slide 32
 Skipper is basically a transparent request proxy. It looks at the incoming requests and forwards them to different endpoints. Usually either APIs or the layout service.
 Skipper also provides sme basix security features. Since every incoming request first hits skipper, it is the only part that needs to be protected against DDoS attacks. Since it is the one entry point into our system, we also don't have to to worry about Cross Origin complications. Skipper is also the only part of the whole system that knows the encryption keys for the cookies that we sot on our customers and it conveniently provides XSRF protection.
-
 To keep latency down, it fully supports streaming responses and easily handles our peak load of nearly 8000 requests per second.
-
 If you are interested in skipper, it is written in Go and the source is on github.
-
 The flexibility of the router allows us one more very neat trick.
 ** Slide 33
 Incoming requests are routed by skipper either to the layout service or to APIs. But we can of course also route requests directly to the legacy application - by the way, we gave our legacy application also a name. Our legacy app is called jimmy.

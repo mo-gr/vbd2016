@@ -5,3 +5,7 @@ catchAllToLegacy: *
 newProductPage: Path("/duck")
   -> setResponseHeader("World", "new")
   -> "http://localhost:8080";
+
+
+slowApi: Path("/api/slow")
+  -> "http://localhost:6006";
